@@ -26,8 +26,13 @@ struct array_elements input_array()
 	
 	
 	
-void reverse_string(int string){
-	for i in 
+void reverse_string(char* string[],int string_size){
+	for (int i = 0; i < string_size; i ++)
+	{
+		string[i] = string[string size -1 -i]
+	 
+	
+	
 int main(){
 	
 	struct array_elements user  = input_array();
