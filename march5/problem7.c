@@ -1,9 +1,18 @@
-#include<stdio.h>
+#include <stdio.h>
 
-int main()
-{
-	int a = 456;
-	do {
-		int reverse_a = 0;
-		a 
+int main() {
+    int num, reversed = 0, remainder;
+
+    printf("Enter an integer: ");
+    scanf("%d", &num);
+
+    do {
+        remainder = num % 10;
+        reversed = reversed * 10 + remainder;
+        num /= 10;
+    } while (num != 0);
+
+    printf("Reversed number: %d\n", reversed);
+    return 0;
 }
+

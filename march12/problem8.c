@@ -1,36 +1,50 @@
 #include <stdio.h>
 
-int main(int argc, char *argv[]) {
-    if (argc < 3) {
-        printf("Usage: %s output.txt file1.txt file2.txt ...\n", argv[0]);
+int main()
+{
+    int i, x;
+    char file[50], filemerge[50]; 
+    char ch;
+    
+    
+    printf("Enter number of files to merge: ");
+    scanf("%d", &x);
+    
+    FILE *fs[x], *ft;
+    
+  
+    printf("Enter name of file which will store contents of files: ");
+    scanf("%s", filemerge);
+    
+    
+    ft = fopen(filemerge, "w");
+    if (ft == NULL) {
+        printf("Error opening file %s for writing.\n", filemerge);
         return 1;
     }
 
-    FILE *outfile = fopen(argv[1], "w");
-    if (outfile == NULL) {
-        perror("Error opening output file");
-        return 1;
-    }
-
-    char buffer[1024];
-    size_t bytesRead;
-
-    for (int i = 2; i < argc; i++) {
-        FILE *infile = fopen(argv[i], "r");
-        if (infile == NULL) {
-            perror("Error opening input file");
-            continue;
+    
+    for (i = 0; i < x; i++) {
+        printf("Enter name of input file %d: ", i + 1);
+        scanf("%s", file); 
+        
+        fs[i] = fopen(file, "r"); 
+        if (fs[i] == NULL) {
+            printf("Error opening file %s for reading.\n", file);
+            return 1;
         }
 
-        while ((bytesRead = fread(buffer, 1, sizeof(buffer), infile)) > 0) {
-            fwrite(buffer, 1, bytesRead, outfile);
+        
+        while ((ch = fgetc(fs[i])) != EOF) {
+            fputc(ch, ft); 
         }
 
-        fclose(infile);
+        fclose(fs[i]);
     }
 
-    fclose(outfile);
-    printf("Files merged successfully into %s\n", argv[1]);
+    fclose(ft); 
+
+    printf("Files merged successfully into %s\n", filemerge);
+
     return 0;
 }
-

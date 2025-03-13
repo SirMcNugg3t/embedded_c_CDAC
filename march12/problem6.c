@@ -1,15 +1,38 @@
-#include<stdio.h>
-#include <string.h>
+#include <stdio.h>
 
-int main(){
+int main() {
+    FILE *sourceFile, *destinationFile;
+    char sourcePath[100], destinationPath[100];
+    char ch;
 
-	FILE* file1 = fopen("problem4.txt", "r");
-	FILE* file2 = fopen("problem6.txt", "w+");
+    printf("Enter source file path: ");
+    scanf("%s", sourcePath);
 
-	fwrite(file2, 1, 10000, file1);  
+    printf("Enter destination file path: ");
+    scanf("%s", destinationPath);
 
-	fclose(file1);
-	fclose(file1);
-	return 0;
+    sourceFile = fopen(sourcePath, "r");
+    if (sourceFile == NULL) {
+        printf("Cannot open source file.\n");
+        return 1;
+    }
+
+    destinationFile = fopen(destinationPath, "w");
+    if (destinationFile == NULL) {
+        printf("Cannot open destination file.\n");
+        fclose(sourceFile);
+        return 1;
+    }
+
+    while ((ch = fgetc(sourceFile)) != EOF) {
+        fputc(ch, destinationFile);
+    }
+
+    printf("File copied successfully.\n");
+
+    fclose(sourceFile);
+    fclose(destinationFile);
+
+    return 0;
 }
 

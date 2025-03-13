@@ -1,53 +1,16 @@
-#include<stdio.h>
+#include <stdio.h>
 
-typedef struct{
-	int b2 : 1;
-	int b3 : 1;
-}bits;
+int main() {
+    unsigned int num;
+    printf("Enter an integer: ");
+    scanf("%u", &num);
 
-bits set_bits{
-	
-	
+    if ((num & (1 << 2)) && (num & (1 << 3))) {
+        printf("Both bit 2 and bit 3 are set.\n");
+    } else {
+        printf("Both bit 2 and bit 3 are not set.\n");
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-#include<stdio.h>
-
-void xor(int a,int b){	
-	if (a^b == 0)printf("same\n");
-	else printf("diff\n");
+    return 0;
 }
-	
-int main(){
-	int a = 0;
-	int b = 1;
-
-	xor(a,b);
-	
-	a = 0;
-	b = 0;
-	
-	xor(a,b);
-	
-	return 0 ;
-}
-
-*/
-
-
 
